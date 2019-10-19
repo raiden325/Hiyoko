@@ -1,0 +1,11 @@
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\bin\Debug\Hiyoko.exe.config
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\bin\Debug\Hiyoko.exe
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\bin\Debug\Hiyoko.pdb
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\bin\Debug\Hiyoko.xml
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.Hiyoko.resources
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.Resources.resources
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.vbproj.GenerateResource.cache
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.vbproj.CoreCompileInputs.cache
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.exe
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.xml
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.pdb
