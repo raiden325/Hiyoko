@@ -14,6 +14,7 @@
 
     Const SearchIGNCode As String = """name"""
     Const SearchClanCode As String = "clanAbbrev"
+    Const NumPlayers As Integer = 60    '1ファイル当たりの最大プレイヤー数 
 
     Private DispData() As StoreDataType
     Private NumDispData As Integer
@@ -23,7 +24,7 @@
         Dim NumFiles As Integer = Hiyoko.TargetFileList.Items.Count
         NumDispData = 1
         If NumFiles > 0 Then
-            ReDim DispData(NumFiles * 30)
+            ReDim DispData(NumFiles * NumPlayers)
             ' 1.解析対象ファイル数を取得
             For FileIdx As Integer = 0 To NumFiles - 1 Step 1
                 ' 2.解析対象ファイルを開き、一行目を読み込む
@@ -31,7 +32,7 @@
                 Dim reader As New System.IO.StreamReader(FilePath, System.Text.Encoding.GetEncoding("shift_jis"))
                 Dim Buf As String = reader.ReadLine()
                 ' 3."Name"(IGN),"ClanAbbrev"を抽出
-                Dim Datas(30) As ExtDataType
+                Dim Datas(NumPlayers) As ExtDataType
                 Dim Elem As Integer = 1
                 While Elem > 0
                     Call ExtIGNandClan(Buf, Datas, Elem)
@@ -47,7 +48,7 @@
                 ' 5.次の解析対象ファイルへ
                 reader.Close()
             Next FileIdx
-            Call SetClanList(NumFiles * 30)
+            Call SetClanList(NumFiles * NumPlayers)
         Else
             '解析対象ファイルなし -> DispDataクリア
             Erase DispData
@@ -79,7 +80,7 @@
         Dim sClan As Integer = 1
         Dim eClan As Integer = 1
 
-        For SearchCnt As Integer = 1 To 30
+        For SearchCnt As Integer = 1 To NumPlayers
             posIGN = Buf.IndexOf(SearchIGNCode, posIGN + 1)
             If posIGN > 0 Then
                 sIGN = Buf.IndexOf("""", posIGN + 7) + 1
@@ -88,9 +89,11 @@
 
                 posClan = Buf.IndexOf(SearchClanCode, posIGN)
                 If posClan > 0 Then
-                    sClan = Buf.IndexOf("""", posClan + 13) + 1
+                    sClan = Buf.IndexOf("""", posClan + 11) + 1
                     eClan = Buf.IndexOf(",", posClan + 14) - 1
-                    Datas(SearchCnt).Clan = Buf.Substring(sClan, eClan - sClan)
+                    If (sClan < eClan) Then
+                        Datas(SearchCnt).Clan = Buf.Substring(sClan, eClan - sClan)
+                    End If
                 End If
                 Elems = SearchCnt
             Else
@@ -116,17 +119,18 @@
                 End If
             Next InvalidIGNIdx
             If InvalidIGNFlag = False Then
-                For j As Integer = 1 To NumDispData Step 1
-                    If (DispData(j).IGN = Datas(i).IGN) Then
-                        If (DispData(j).FileIdx <> FileIdx) Then
-                            DispData(j).Times += 1
+                For DispDataIdx As Integer = 1 To NumDispData Step 1
+                    If (DispData(DispDataIdx).IGN = Datas(i).IGN) Then
+                        If (DispData(DispDataIdx).FileIdx <> FileIdx) Then
+                            DispData(DispDataIdx).Times += 1
+                            DispData(DispDataIdx).FileIdx = FileIdx
                         End If
                         NoDataFlag = False
                         Exit For
                     Else
                         NoDataFlag = True
                     End If
-                Next j
+                Next DispDataIdx
                 If NoDataFlag = True Then
                     DispData(NumDispData).IGN = Datas(i).IGN
                     DispData(NumDispData).Clan = Datas(i).Clan
