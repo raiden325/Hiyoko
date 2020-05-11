@@ -12,7 +12,8 @@
         Dim FileIdx As Integer
     End Structure
 
-    Const SearchIGNCode As String = """name"""
+    Const SearchIGNCode As String = """fakeName"""
+    Const SearchSkillCode As String = """skill"""
     Const SearchClanCode As String = "clanAbbrev"
     Const NumPlayers As Integer = 60    '1ファイル当たりの最大プレイヤー数 
 
@@ -79,18 +80,20 @@
         Dim eIGN As Integer = 1
         Dim sClan As Integer = 1
         Dim eClan As Integer = 1
+        Dim posSkil As Integer = Buf.IndexOf(SearchSkillCode, 1)
 
         For SearchCnt As Integer = 1 To NumPlayers
+            'アノニマイザー機能によりリプレイファイルの構造が変更された
             posIGN = Buf.IndexOf(SearchIGNCode, posIGN + 1)
-            If posIGN > 0 Then
-                sIGN = Buf.IndexOf("""", posIGN + 7) + 1
-                eIGN = Buf.IndexOf(",", posIGN + 8) - 1
+            If posIGN > 0 And posIGN < posSkil Then
+                sIGN = Buf.IndexOf("""", posIGN + 11) + 1
+                eIGN = Buf.IndexOf("""", sIGN + 1)
                 Datas(SearchCnt).IGN = Buf.Substring(sIGN, eIGN - sIGN)
 
                 posClan = Buf.IndexOf(SearchClanCode, posIGN)
                 If posClan > 0 Then
                     sClan = Buf.IndexOf("""", posClan + 11) + 1
-                    eClan = Buf.IndexOf(",", posClan + 14) - 1
+                    eClan = Buf.IndexOf("""", sClan)
                     If (sClan < eClan) Then
                         Datas(SearchCnt).Clan = Buf.Substring(sClan, eClan - sClan)
                     End If

@@ -9,3 +9,4 @@ C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.vb
 C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.exe
 C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.xml
 C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.pdb
+C:\Users\raiden\Documents\Visual Studio 2019\Projects\Hiyoko\obj\Debug\Hiyoko.vbprojAssemblyReference.cache
